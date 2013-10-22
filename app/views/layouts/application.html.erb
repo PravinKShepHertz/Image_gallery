@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>App42gallery</title>
+  <%= stylesheet_link_tag "application", "customScroller", "ie6", "prettyCheckboxes", "style", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "jquery.customScroller-1.2", "jquery_functions", "js-func", "png-fix", "prettyCheckboxes", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="shell">
+  <div class="gallery">
+    <div class="gallery-t">
+      <div class="gallery-head">
+        <div class="sort-by">
+          <div class="custom-checkboxes">
+            <% unless session[:user_id] == nil %>
+              <%= link_to "Logout", user_logout_path %> | 
+              <%= link_to "Upload Image", upload_new_path %>
+            <% else %>
+              <%= link_to "Login", user_signin_path %> | 
+              <%= link_to "Register", user_signup_path %>
+            <% end %>
+            <div class="cl">&nbsp;</div>
+          </div>
+          <div class="cl">&nbsp;</div>
+        </div>
+        <div class="cl">&nbsp;</div>
+      </div>
+      <div class="gallery-holder">
+        <div class="gallery-content">
+          <% flash.each do |name, msg| %>
+		  	<div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+		      <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+		    </div>
+		  <% end %>		
+          <%= yield %>
+       </div>
+     </div>
+    </div>
+  </div>
+  <div class="gallery-b"></div>
+</div>
+</body>
+</html>

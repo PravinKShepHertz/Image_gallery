@@ -1,0 +1,12 @@
+<% if @upload %>
+<ul>
+  <% @upload.fileList.each do |image| %>
+    <li><a href="#"><%= image_tag "#{image.url}", :size => "110x110" %></a>
+      <div class="image-hover">
+        <h5>Lorem ipsum sit amet dolor.</h5>
+        <h6>Category Name</h6>
+        <a href="#" class="preview">Preview image</a> </div>
+    </li>           
+  <% end %>
+ </ul>
+ <% end %>
